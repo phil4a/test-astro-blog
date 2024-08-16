@@ -12,6 +12,9 @@ export async function GET(context) {
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.pubDate,
+      author: post.data.author,
+      image: post.data.image,
+      tags: post.data.tags,
       description: post.data.description,
       link: `/posts/${post.slug}/`,
     })),
