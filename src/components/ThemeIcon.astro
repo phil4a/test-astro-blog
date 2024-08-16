@@ -75,7 +75,9 @@
       document.documentElement.classList.add("dark");
     }
 
-    window.localStorage.setItem("theme", theme);
+    if (theme !== null) {
+      window.localStorage.setItem("theme", theme);
+    }
 
     const handleToggleClick = () => {
       const element = document.documentElement;
@@ -85,9 +87,10 @@
       localStorage.setItem("theme", isDark ? "dark" : "light");
     };
 
+    document;
     document
       .getElementById("themeToggle")
-      .addEventListener("click", handleToggleClick);
+      ?.addEventListener("click", handleToggleClick);
   });
 </script>
 
