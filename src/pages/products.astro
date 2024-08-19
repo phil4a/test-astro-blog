@@ -1,0 +1,105 @@
+---
+import { getImage, Image, Picture } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const consumerKey = "ck_87e867bb56500705c704f379d82d10db75596246";
+const consumerSecret = "cs_623ef939d727cb05a59ca4dc37ec9907a17642f9";
+const siteUrl = "https://bitcar.rent";
+const lang = "en";
+
+const res = await fetch(
+  "https://bitcar.rent/wp-json/wc/v3/products?per_page=5&order=desc&orderby=date&lang=en&_embed",
+  {
+    headers: {
+      //@ts-ignore
+      Authorization: `Basic ${Buffer.from(`${consumerKey}:${consumerSecret}`).toString("base64")}`,
+    },
+  },
+);
+
+const products = await res.json();
+---
+
+<!-- <img src={product.images[0]?.src} alt={product.name} /> -->
+<BaseLayout title="Welcome to Astro.">
+  <div class="product-grid">
+    {
+      products.map((product) => (
+        <div class="product-card">
+          <a href={product.permalink} class="product-image">
+            <Picture
+              width={500}
+              height={500}
+              formats={["avif", "webp", "jpg"]}
+              quality={"low"}
+              src={product.images[0]?.src}
+              alt={product.name}
+            />
+          </a>
+          <div class="product-details">
+            <h2 class="product-title">
+              <a href={product.permalink}>{product.name}</a>
+            </h2>
+            <p class="product-price">
+              {product.price} {product.currency}
+            </p>
+            <a href={product.permalink} class="product-link">
+              View Details
+            </a>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .product-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .product-title {
+    font-size: 18px;
+    margin: 12px 0;
+    color: #333;
+  }
+
+  .product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .product-short-description {
+    margin-top: 8px;
+    color: #555;
+  }
+
+  .product-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .product-link:hover {
+    text-decoration: underline;
+  }
+</style>
