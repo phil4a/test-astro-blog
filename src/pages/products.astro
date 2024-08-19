@@ -2,8 +2,9 @@
 import { getImage, Image, Picture } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const consumerKey = "ck_87e867bb56500705c704f379d82d10db75596246";
-const consumerSecret = "cs_623ef939d727cb05a59ca4dc37ec9907a17642f9";
+const consumerKey = import.meta.env.BITCAR_CONSUMER_KEY;
+const consumerSecret = import.meta.env.BITCAR_CONSUMER_SECRET;
+
 const siteUrl = "https://bitcar.rent";
 const lang = "en";
 
