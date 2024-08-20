@@ -6,7 +6,7 @@ import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://phil-astro.netlify.app/",
+  site: "http://astro-test-blog-30c8a9-6f1f61-51-250-32-23.traefik.me/",
   image: {
     domains: ["dev.bitcar.rent"],
   },
