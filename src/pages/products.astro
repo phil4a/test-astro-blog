@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import { getImage, Image, Picture } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -9,7 +11,6 @@ const siteUrl = "https://bitcar.rent";
 const lang = "en";
 
 const res = await fetch(
-
   "https://bitcar.rent/wp-json/wc/v3/products?per_page=5&order=desc&orderby=date&lang=en&_embed",
   {
     headers: {

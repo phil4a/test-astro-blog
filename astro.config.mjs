@@ -8,13 +8,18 @@ import netlify from "@astrojs/netlify";
 export default defineConfig({
   site: "https://phil-astro.netlify.app/",
   image: {
-    domains: ["bitcar.rent"]
+    domains: ["bitcar.rent"],
   },
-  integrations: [preact({
-    include: ["**/preact/*"]
-  }), react({
-    include: ["**/react/*"]
-  })],
-  output: "server",
-  adapter: netlify()
+  integrations: [
+    preact({
+      include: ["**/preact/*"],
+    }),
+    react({
+      include: ["**/react/*"],
+    }),
+  ],
+  output: "hybrid",
+  adapter: netlify({
+    cacheOnDemandPages: true,
+  }),
 });
