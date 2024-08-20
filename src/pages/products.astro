@@ -6,12 +6,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const consumerKey = import.meta.env.BITCAR_CONSUMER_KEY;
 const consumerSecret = import.meta.env.BITCAR_CONSUMER_SECRET;
+const siteUrl = import.meta.env.BITCAR_API_URL;
 
-const siteUrl = "https://bitcar.rent";
 const lang = "en";
 
 const res = await fetch(
-  "https://bitcar.rent/wp-json/wc/v3/products?per_page=5&order=desc&orderby=date&lang=en&_embed&offset=5",
+  `${siteUrl}/wp-json/wc/v3/products?per_page=5&order=desc&orderby=date&lang=en&_embed&offset=5`,
   {
     headers: {
       //@ts-ignore

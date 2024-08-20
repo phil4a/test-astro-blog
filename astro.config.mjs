@@ -8,7 +8,7 @@ import netlify from "@astrojs/netlify";
 export default defineConfig({
   site: "https://phil-astro.netlify.app/",
   image: {
-    domains: ["bitcar.rent"],
+    domains: ["dev.bitcar.rent"],
   },
   integrations: [
     preact({

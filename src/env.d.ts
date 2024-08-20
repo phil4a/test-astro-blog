@@ -2,6 +2,7 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
+  readonly BITCAR_API_URL: string;
   readonly BITCAR_CONSUMER_KEY: string;
   readonly BITCAR_CONSUMER_SECRET: string;
   // больше переменных env...
