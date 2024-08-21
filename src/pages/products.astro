@@ -1,5 +1,5 @@
 ---
-export const prerender = false;
+export const prerender = true;
 
 import { Picture } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -31,7 +31,7 @@ const products = await res.json();
     {
       products.map((product) => (
         <div class="product-card">
-          <a href={`/product/${product.slug}`} class="product-image">
+          <a href={"#"} class="product-image">
             <Picture
               width={500}
               height={500}
@@ -39,16 +39,17 @@ const products = await res.json();
               quality={"low"}
               src={product.images[0]?.src}
               alt={product.name}
+              transition:name="image"
             />
           </a>
           <div class="product-details">
             <h2 class="product-title">
-              <a href={`/product/${product.slug}`}>{product.name}</a>
+              <a href={"#"}>{product.name}</a>
             </h2>
             <p class="product-price">
               {product.price} {product.currency}
             </p>
-            <a href={`/product/${product.slug}`} class="product-link">
+            <a href={"#"} class="product-link">
               View Details
             </a>
           </div>

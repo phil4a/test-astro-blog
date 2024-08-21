@@ -18,8 +18,8 @@ export default defineConfig({
       include: ["**/react/*"],
     }),
   ],
-  output: "hybrid",
-  adapter: netlify({
-    cacheOnDemandPages: true,
-  }),
+  // output: "hybrid",
+  // adapter: netlify({
+  //   cacheOnDemandPages: true,
+  // }),
 });
