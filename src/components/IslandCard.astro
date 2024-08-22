@@ -1,0 +1,74 @@
+---
+import { Picture } from "astro:assets";
+
+const { product } = Astro.props;
+---
+
+<div class="product-card">
+  <a href={`/product/${product.slug}`} class="product-image">
+    <Picture
+      width={500}
+      height={500}
+      formats={["avif", "webp", "jpg"]}
+      quality={"low"}
+      src={product.images[0]?.src}
+      alt={product.name}
+      transition:name="image"
+    />
+  </a>
+  <div class="product-details">
+    <h2 class="product-title">
+      <a href={`/product/${product.slug}`}>{product.name}</a>
+    </h2>
+    <p class="product-price">
+      {product.price}
+      {product.currency}
+    </p>
+    <a href={`/product/${product.slug}`} class="product-link"> View Details </a>
+  </div>
+</div>
+
+<style>
+  .product-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .product-title {
+    font-size: 18px;
+    margin: 12px 0;
+    color: #333;
+  }
+
+  .product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .product-short-description {
+    margin-top: 8px;
+    color: #555;
+  }
+
+  .product-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .product-link:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+export const prerender = false;
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import IslandCard from "../components/IslandCard.astro";
+
+const pageTitle = "Products";
+
+const consumerKey = import.meta.env.BITCAR_CONSUMER_KEY;
+const consumerSecret = import.meta.env.BITCAR_CONSUMER_SECRET;
+const siteUrl = import.meta.env.BITCAR_API_URL;
+
+const lang = "en";
+
+const res = await fetch(
+  `${siteUrl}/wp-json/wc/v3/products?per_page=15&order=desc&orderby=date&lang=en&_embed`,
+  {
+    headers: {
+      //@ts-ignore
+      Authorization: `Basic ${Buffer.from(`${consumerKey}:${consumerSecret}`).toString("base64")}`,
+    },
+  },
+);
+
+const products = await res.json();
+---
+
+<!-- <img src={product.images[0]?.src} alt={product.name} /> -->
+<BaseLayout pageTitle={pageTitle}>
+  <div class="product-grid">
+    {
+      products.map((product) => (
+        <IslandCard product={product} server:defer>
+          <div slot="fallback" class="skeleton">
+            <div class="skeleton__image" />
+            <div class="skeleton__title" />
+            <div class="skeleton__description" />
+            <div class="skeleton__price" />
+          </div>
+        </IslandCard>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+
+  .skeleton__image {
+    width: 100%;
+    height: 200px;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+  }
+
+  .skeleton__title {
+    width: 100%;
+    height: 20px;
+    margin: 12px 0;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+  }
+
+  .skeleton__description {
+    width: 100%;
+    height: 20px;
+    margin: 12px 0;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+  }
+
+  .skeleton__price {
+    width: 100%;
+    height: 20px;
+    margin: 12px 0;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+  }
+</style>
